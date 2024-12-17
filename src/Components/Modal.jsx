@@ -9,14 +9,14 @@ function Modal() {
     };
 
     const handleClose = (e) => {
-        if (e.target.classList.contains('modal-overlay')) {
+         if (e.target === e.currentTarget) {
             setOpenModal(false);
         }
     };
 
     return (
         <div className='modal'>
-            <h2>User Details Form</h2>
+            <h2>User Details Modal</h2>
             <button onClick={handleOpen} style={buttonStyle}>
                 Open Form
             </button>
