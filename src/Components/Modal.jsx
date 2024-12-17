@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Form from './Form';
 
 function Modal() {
     const [openModal, setOpenModal] = useState(false);
+    const modalRef = useRef(null);
 
     const handleOpen = () => {
         setOpenModal(true);
     };
 
     const handleClose = (e) => {
-         if (e.target === e.currentTarget) {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
             setOpenModal(false);
         }
     };
+
+    useEffect(() => {
+        if (openModal) {
+            document.addEventListener('click', handleClose);
+        }
+        return () => {
+            document.removeEventListener('click', handleClose);
+        };
+    }, [openModal]);
 
     return (
         <div className='modal'>
@@ -24,10 +34,9 @@ function Modal() {
             {openModal && (
                 <div
                     className="modal-overlay"
-                    onClick={handleClose}
                     style={overlayStyle}
                 >
-                    <div className="modal-content" style={modalStyle}>
+                    <div className="modal-content" style={modalStyle} ref={modalRef}>
                         <Form />
                     </div>
                 </div>
