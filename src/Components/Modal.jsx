@@ -16,7 +16,7 @@ function Modal() {
   };
 
   return (
-    <div className="modal">
+    <>
       <h2>User Details Modal</h2>
       <button onClick={handleOpen} style={buttonStyle}>
         Open Form
@@ -24,7 +24,7 @@ function Modal() {
 
       {openModal && (
         <div
-          className="modal-overlay"
+          className="modal"
           style={overlayStyle}
           onClick={handleClose} 
         >
@@ -33,7 +33,7 @@ function Modal() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
