@@ -1,31 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Form from './Form';
 
 function Modal() {
     const [openModal, setOpenModal] = useState(false);
-    const modalRef = useRef(null);
 
     const handleOpen = () => {
         setOpenModal(true);
     };
 
     const handleClose = (e) => {
-        if (modalRef.current && !modalRef.current.contains(e.target)) {
+        // Close modal if click is outside the modal content
+        if (e.target.classList.contains('modal-overlay')) {
             setOpenModal(false);
         }
     };
 
-    useEffect(() => {
-        if (openModal) {
-            document.addEventListener('click', handleClose);
-        }
-        return () => {
-            document.removeEventListener('click', handleClose);
-        };
-    }, [openModal]);
-
     return (
-        <div className='modal'>
+        <div className="modal">
             <h2>User Details Modal</h2>
             <button onClick={handleOpen} style={buttonStyle}>
                 Open Form
@@ -35,8 +26,9 @@ function Modal() {
                 <div
                     className="modal-overlay"
                     style={overlayStyle}
+                    onClick={handleClose} // Listen for click outside modal
                 >
-                    <div className="modal-content" style={modalStyle} ref={modalRef}>
+                    <div className="modal-content" style={modalStyle}>
                         <Form />
                     </div>
                 </div>
