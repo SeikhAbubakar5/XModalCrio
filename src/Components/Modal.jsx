@@ -9,7 +9,6 @@ function Modal() {
     };
 
     const handleClose = (e) => {
-        // Close modal if click is outside the modal content
         if (e.target.classList.contains('modal-overlay')) {
             setOpenModal(false);
         }
