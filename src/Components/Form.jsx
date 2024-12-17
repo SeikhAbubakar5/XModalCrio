@@ -50,7 +50,7 @@ function Form() {
         const selectedDOB = new Date(formData.dob);
     
         if (selectedDOB > currentDate) {
-          alert('Invalid Date of Birth. Date of birth cannot be in the future.');
+          alert('Invalid date of birth. Date of birth cannot be in the future.');
           return;
         }
     
